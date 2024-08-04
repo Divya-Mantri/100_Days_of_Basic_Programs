@@ -1,21 +1,5 @@
 #include<iostream>
-#include<cctype>
 using namespace std;
-
-    // int check(int item_no)
-    // {
-    //      try
-    //         {
-    //             if(ispunct(item_no)||isalpha(item_no))
-    //             {
-    //                 cout<<"Alphabet & Punctuation characters are not allowed!"<<endl;
-    //             }
-    //         }
-    //         catch(const std::exception& e)
-    //         {
-    //             cout<<"Throws an Error!"<< e.what() << '\n';
-    //         }
-    // };
 
     int price(int item_no)
     {
@@ -46,9 +30,12 @@ using namespace std;
         }
         else
         {    
-            while(item_no<1 || item_no>5)
+             //If the user enters something that's not a number , cin gets confused and sets the "fail" flag. if (cin.fail()) checks if this happened . That'swhy cin.fail() function is used & along with we are checking user should not enter any number less than 1 or greater than 5
+            while(cin.fail()||item_no<1 || item_no>5)      
             {
-            cout<<"There's no item as such!"<<endl;
+                cin.clear();            //cin.clear() removes the "fail" flag so cin can work again
+                cin.ignore(INT32_MAX,'\n');         // This discards the invalid input from the input buffer. 
+                cout<<"There's no item as such!"<<endl;
                 cout<<"Enter the option again:";
                 cin>>item_no;            
 
@@ -78,7 +65,6 @@ int main()
         int item_no;
         cout<<"Enter the option:";
         cin>>item_no;
-        // check(item_no);
 
         sum=sum+price(item_no);
 
